@@ -1,0 +1,12 @@
+services:
+  cloudflared-access:
+    image: ghcr.io/nanairoservernetwork/cloudflared-access:hoge
+    volumes:
+      - ./access-command.sh:/access-command.sh
+    tty: true
+    stdin_open: true
+    network_mode: host
+    restart: always
+    environment:
+      - CF_TOKEN_ID=hoge
+      - CF_TOKEN_SECRET=hoge
