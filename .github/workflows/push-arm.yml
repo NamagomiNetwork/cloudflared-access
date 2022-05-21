@@ -40,7 +40,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
-          context: ./docker/arm64/cloudflared-access
+          context: ./image/arm
           platforms: linux/arm64
           push: true
           tags: |
