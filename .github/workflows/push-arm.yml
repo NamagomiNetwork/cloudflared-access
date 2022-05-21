@@ -1,4 +1,4 @@
-name: Build and push docker image
+name: Arm-cloudflared-dockerBuild
 on:
   push:
     paths:
@@ -6,28 +6,33 @@ on:
     - '.github/workflows/push-arm.yml'
 
 jobs:
-  build-and-push:
+  Arm-cloudflared-build-and-push:
     runs-on: ubuntu-latest
     env:
       IMAGE_NAME: cloudflared-access-arm64
       TEAM: namagominetwork
     steps:
-      - name: checkout
-        uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@master
+        with:
+          submodules: recursive
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
-
+        with:
+          image: tonistiigi/binfmt:latest
+          platforms: arm64,arm
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
+        uses: docker/setup-buildx-action@v2
 
       - name: Login to GitHub Container Registry
-        uses: docker/login-action@v1
+        uses: docker/login-action@v2
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      # gitのcommit shaをtagにする
       - name: Set outputs
         id: vars
         run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
@@ -35,8 +40,8 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
-          context: ./image/arm
-          platforms: inux/arm64
+          context: ./docker/arm64/cloudflared-access
+          platforms: linux/arm64
           push: true
           tags: |
             ghcr.io/${{ env.TEAM }}/${{ env.IMAGE_NAME }}:${{ steps.vars.outputs.sha_short }}
