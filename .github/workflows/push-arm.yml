@@ -1,8 +1,9 @@
 name: Build and push docker image
 on:
+  push:
     paths:
     - 'image/arm/**'
-    - '.github/workflows/push-amd.yml'
+    - '.github/workflows/push-arm.yml'
 
 jobs:
   build-and-push:

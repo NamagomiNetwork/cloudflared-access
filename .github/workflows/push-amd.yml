@@ -1,5 +1,6 @@
 name: Build and push docker image
 on:
+  push:
     paths:
     - 'image/**'
     - '.github/workflows/push-amd.yml'
