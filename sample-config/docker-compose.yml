@@ -1,6 +1,6 @@
 services:
   cloudflared-access:
-    image: ghcr.io/nanairoservernetwork/cloudflared-access:hoge
+    image: ghcr.io/namagominetwork/cloudflared-access-amd64:f3cd6c3
     volumes:
       - ./access-command.sh:/access-command.sh
     tty: true
