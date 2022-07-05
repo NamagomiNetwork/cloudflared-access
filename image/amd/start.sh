@@ -1,12 +1,5 @@
 #!/bin/bash
 
-# ARM
-apt-get install -y tzdata screen --&& \
-    ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
-apt update && apt install -y wget
-wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-arm64.deb
-apt install -y ./cloudflared-linux-arm64.deb
-
 # 必須変数に値が設定されているか確認
 if [ -z "$ACCESS_PROTOCOL" ]; then
 echo "変数 ACCESS_PROTOCOL が指定されていないため起動を中断します"
