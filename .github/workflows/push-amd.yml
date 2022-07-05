@@ -1,6 +1,8 @@
 name: Amd-cloudflared-dockerBuild
 on:
   push:
+    branches:
+    - main
     paths:
     - 'image/**'
     - '.github/workflows/push-amd.yml'
