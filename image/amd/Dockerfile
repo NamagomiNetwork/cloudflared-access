@@ -1,6 +1,6 @@
 FROM cloudflare/cloudflared:2022.7.0 as cloudflared-binary
 
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 
 COPY --from=cloudflared-binary /usr/local/bin/cloudflared /usr/local/bin/
 
